@@ -5,17 +5,16 @@
 Помогите Васе написать код функции, вычисляющей y = ax2 + bx + c.
 Напишите программу, которая будет по коэффициентам a, b, c и числу x выводить значение функции в точке x.
 """
+
 import pytest
 
 
 def get_function_result(a: int, x: int, b: int, c: int) -> float:
-    return a * x ** 2 + b * x + c
+    return a * x**2 + b * x + c
 
 
-@pytest.mark.parametrize("a, x, b, c, expected",
-                         [
-                             (-8, -5, -2, 7, -183),
-                             (8, 2, 9, -10, 40)
-                         ])
-def test_function_result(a: int, x: int, b: int, c: int, expected:float):
+@pytest.mark.parametrize(
+    "a, x, b, c, expected", [(-8, -5, -2, 7, -183), (8, 2, 9, -10, 40)]
+)
+def test_function_result(a: int, x: int, b: int, c: int, expected: float):
     assert get_function_result(a, x, b, c) == expected
