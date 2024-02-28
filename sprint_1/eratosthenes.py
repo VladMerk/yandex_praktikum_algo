@@ -17,7 +17,7 @@
 """
 
 
-def eratosthenes(n):
+def eratosthenes(n: int) -> list:
     numbers = list(range(n + 1))
     numbers[0] = numbers[1] = False
     for num in range(2, n):
@@ -27,11 +27,11 @@ def eratosthenes(n):
     return numbers
 
 
-def eratosthenes_effective(n):
+def eratosthenes_effective(n: int) -> list[int]:
     """Алгоритм можно оптимизировать. Для каждого простого числа
     p начнём отмечать числа, начиная с p^2,
     как составные. Ведь все составные числа,
-    которые меньше его, будут уже рассмотрены.
+    которые меньше него, будут уже рассмотрены.
     """
     numbers = list(range(n + 1))
     numbers[0] = numbers[1] = False
@@ -39,4 +39,4 @@ def eratosthenes_effective(n):
         if numbers[num]:
             for j in range(num * num, n + 1, num):
                 numbers[j] = False
-    return numbers
+    return [num for num in numbers if num]
