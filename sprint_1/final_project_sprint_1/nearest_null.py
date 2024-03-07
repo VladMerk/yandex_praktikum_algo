@@ -1,7 +1,7 @@
 """
 Задача "Ближайший ноль".
 
-Ссылка на посылку: https://contest.yandex.ru/contest/22450/run-report/108690070/
+Ссылка на посылку: https://contest.yandex.ru/contest/22450/run-report/109044792/
 """
 
 
@@ -33,7 +33,11 @@ def get_nearest_null(n: int, houses: list) -> list:
     return distances
 
 
-if __name__ == "__main__":
+def main():
     n, houses = get_input()
     distances = get_nearest_null(n, houses)
     print(*distances)
+
+
+if __name__ == "__main__":
+    main()
