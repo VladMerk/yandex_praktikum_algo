@@ -14,6 +14,10 @@ def postfix_calculator(expression: str) -> int:
     return int(stack.pop())
 
 
-if __name__ == "__main__":
+def main():
     expression = input()
     print(postfix_calculator(expression))
+
+
+if __name__ == "__main__":
+    main()
