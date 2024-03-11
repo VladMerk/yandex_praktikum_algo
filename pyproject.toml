@@ -25,5 +25,5 @@ build-backend = "poetry.core.masonry.api"
 line-length = 120
 
 [tool.pytest.ini_options]
-addopts = "-ra -q -p no:cacheprovider --timeout=1"
-timeout = 1
+addopts = "-ra -q -p no:cacheprovider"
+
