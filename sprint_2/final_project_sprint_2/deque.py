@@ -1,3 +1,8 @@
+"""
+Посылка: https://contest.yandex.ru/contest/22781/run-report/109360717/
+"""
+
+
 class Deque:
     def __init__(self, n: int):
         self.deque: list[int | None] = [None] * n
