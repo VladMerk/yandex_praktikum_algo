@@ -1,5 +1,5 @@
 """
-Посылка: https://contest.yandex.ru/contest/22781/run-report/109360717/
+Посылка: https://contest.yandex.ru/contest/22781/run-report/109746683/
 """
 
 

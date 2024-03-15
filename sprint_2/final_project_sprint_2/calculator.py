@@ -1,5 +1,5 @@
 """
-Посылка: https://contest.yandex.ru/contest/22781/run-report/109335627/
+Посылка: https://contest.yandex.ru/contest/22781/run-report/109746764/
 """
 
 eval_func = {"+": lambda x, y: x + y, "-": lambda x, y: x - y, "*": lambda x, y: x * y, "/": lambda x, y: x // y}
