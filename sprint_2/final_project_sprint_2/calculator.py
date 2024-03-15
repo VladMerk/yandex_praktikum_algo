@@ -9,11 +9,11 @@ def postfix_calculator(expression: str) -> int:
     stack = []
     for char in expression.split():
         if char not in "+-*/":
-            stack.append(char)
+            stack.append(int(char))
         else:
-            num_2: str | int = stack.pop()
-            num_1: str | int = stack.pop()
-            stack.append(eval_func[char](int(num_1), int(num_2)))
+            num_2: int = stack.pop()
+            num_1: int = stack.pop()
+            stack.append(eval_func[char](num_1, num_2))
 
     return int(stack.pop())
 

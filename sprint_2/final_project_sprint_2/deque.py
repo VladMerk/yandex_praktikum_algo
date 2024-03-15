@@ -48,7 +48,7 @@ class Deque:
         return value
 
 
-def get_result_operation(d: Deque, operation: str) -> int | str:
+def get_result_operation(d: Deque, operation: str) -> int | str | None:
     commands = {
         "push_back": d.push_back,
         "push_front": d.push_front,
