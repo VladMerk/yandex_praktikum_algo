@@ -20,8 +20,6 @@
 Если подходящих слов несколько, выведите то, которое встречается раньше.
 """
 
-import pytest
-
 
 def get_max_word(words: str) -> None:
     lst_words = words.split()

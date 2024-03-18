@@ -21,9 +21,12 @@ flake8-pyproject = "^1.2.3"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.flake8]
+max-line-length = 120
+extend-ignore = "W291 E128 E122"
+
 [tool.black]
 line-length = 120
 
 [tool.pytest.ini_options]
 addopts = "-ra -q -p no:cacheprovider"
-
