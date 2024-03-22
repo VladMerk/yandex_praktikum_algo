@@ -10,7 +10,7 @@ LETTERS = {
 }
 
 
-def gen_binary(buttons, path, result):
+def gen_binary(buttons, path: str, result):
     if buttons == '':
         result.append(path)
         return
