@@ -7,8 +7,7 @@ import pytest
 
 
 def sub_partition(array, start, end, idx_pivot):
-
-    "returns the position where the pivot winds up"
+    """returns the position where the pivot winds up"""
 
     if not (start <= idx_pivot <= end):
         raise ValueError("idx pivot must be between start and end")

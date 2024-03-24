@@ -22,7 +22,13 @@ def read_input() -> tuple[str, str]:
     return s, t
 
 
-@pytest.mark.parametrize("s, t, expected", [("abc", "ahbgdcu", True), ("abcp", "ahpc", False)])
+@pytest.mark.parametrize(
+    "s, t, expected",
+    [
+        ("abc", "ahbgdcu", True),
+        ("abcp", "ahpc", False),
+    ],
+)
 def test_is_subquences(s, t, expected) -> None:
     assert is_subsequences(s, t) == expected
 

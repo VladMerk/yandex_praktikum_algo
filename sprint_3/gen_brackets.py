@@ -19,10 +19,19 @@
 Формат вывода
 Функция должна напечатать все возможные скобочные последовательности заданной длины в алфавитном (лексикографическом)
 порядке.
+
+Псевдокод из пачки:
+func gen(balance, s) {
+  if (s.length == <сколько нам надо>) {
+    выводим
+  }
+  gen(balance+1, s+'(')
+  gen(balance-1, s+')')
+}
 """
 
 
-def gen_brackets(n: int, prefix: str = "", prev: int = None, post: int = None):
+def gen_brackets(n: int, prefix: str = "", prev: int | None = None, post: int | None = None):
     if prev is None:
         prev = n
     if post is None:
