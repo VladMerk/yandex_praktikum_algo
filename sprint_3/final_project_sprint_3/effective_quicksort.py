@@ -20,7 +20,11 @@
 данных (такая модификация быстрой сортировки называется "in-place").
 
 Временная сложность: O(n*logn)
-Пространственная сложность: O(1)
+
+Пространственная сложность:
+Алгоритм реализован так, что мы не потребляем дополнительную память для копирования частей массива,
+но мы потребляем дополнительную память для рекурсионного вызова функции сортировки. И так как массив
+всегда делиться на пополам, пространственная сложность получается: O(logn)
 
 Идеи брал здесь: "https://stackoverflow.com/questions/17773516/in-place-quicksort-in-python".
 Посылка: https://contest.yandex.ru/contest/23815/run-report/110701405/
@@ -53,7 +57,7 @@ class User:
         return f"User(username={self.name}, tasks={self.tasks}, penalty={self.penalty})"
 
 
-def quicksort(array: list, ilx: int, irx: int) -> None | int:
+def quicksort(array: list, ilx: int, irx: int) -> None:
     """Функция быстрой сортировки.
     Так как стажеры сортируются с начала от большего количества решенных задач, то по сути необходимо
     написать функцию-аналог: sorted(list, reverse=True)
@@ -68,7 +72,7 @@ def quicksort(array: list, ilx: int, irx: int) -> None | int:
 
     # Если левый указатель больше чем правый, тогда выходим из рекурсии.
     if ilx >= irx:
-        return -1
+        return None
 
     left, right = ilx, irx
     pivot: User = array[ilx]

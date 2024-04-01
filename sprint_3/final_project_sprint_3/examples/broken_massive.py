@@ -12,52 +12,55 @@
 Можно предполагать, что в массиве только уникальные элементы.
 
 Временная сложность: O(logn)
-Пространственная сложность: O(1), так как мы используем память только для нескольких переменных.
+Пространственная сложность: O(1)
 
-Посылка: https://contest.yandex.ru/contest/23815/run-report/111088976/
+Посылка: https://contest.yandex.ru/contest/23815/run-report/110415655/
 """
 
 
-def broken_search(nums: list, target: int) -> int:
+def _binary_search(nums: list, target: int, left: int, right: int) -> int:
     """
     Функция бинарного поиска в массиве.
 
     Args:
     nums: list - массив, в котором производиться поиск
     target: int - искомое число
+    left: int - левая граница поиска
+    right: int - права граница поиска
 
     Returns:
     Функция возращает индекс, по которому находится искомое число
     или -1, если число не найдено.
     """
 
-    left, right = 0, len(nums) - 1
+    # если левый указатель больше, чем правый - выходим из рекурсии
+    if left > right:
+        return -1
 
-    while left <= right:
-        mid = (left + right) // 2
+    mid = (left + right) // 2
 
-        if nums[mid] == target:
-            return mid
+    if nums[mid] == target:
+        return mid
 
-        # Проверяем, в какой половине массива находится медианный элемент
-        if nums[left] <= nums[mid]:
-            # Левая половина отсортирована правильно
-            if nums[left] <= target < nums[mid]:
-                # Искомый элемент находится в левой отсортированной половине
-                right = mid - 1
-            else:
-                # Искомый элемент находится в правой непрерывной половине
-                left = mid + 1
+    # Существует 4 варианта расположения искомого числа
+    if nums[left] <= nums[mid]:
+        if nums[left] <= target < nums[mid]:
+            # target находится в первой четверти массива
+            return _binary_search(nums, target, left, mid - 1)
         else:
-            # Правая половина отсортирована правильно
-            if nums[mid] < target <= nums[right]:
-                # Искомый элемент находится в правой отсортированной половине
-                left = mid + 1
-            else:
-                # Искомый элемент находится в левой непрерывной половине
-                right = mid - 1
+            # если во второй
+            return _binary_search(nums, target, mid + 1, right)
+    else:
+        if nums[mid] < target <= nums[right]:
+            # в третьей
+            return _binary_search(nums, target, mid + 1, right)
+        else:
+            # в четвертой
+            return _binary_search(nums, target, left, mid - 1)
 
-    return -1
+
+def broken_search(nums: list, target: int) -> int:
+    return _binary_search(nums, target, 0, len(nums) - 1)
 
 
 def test():
