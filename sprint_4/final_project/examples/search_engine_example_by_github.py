@@ -47,8 +47,8 @@ from collections import Counter
 LIMIT = 5
 
 
-def create_index(n):
-    index = {}
+def create_index(n: int) -> dict:
+    index: dict[str, list[tuple[int, int]]] = {}
 
     for idx in range(n):
         document = Counter(sys.stdin.readline().strip().split())
