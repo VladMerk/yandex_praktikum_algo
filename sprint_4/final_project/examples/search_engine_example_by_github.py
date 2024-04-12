@@ -1,7 +1,6 @@
-from heapq import nsmallest
 import sys
 from collections import Counter
-
+from heapq import nsmallest
 
 """
 -- ПРИНЦИП РАБОТЫ --
