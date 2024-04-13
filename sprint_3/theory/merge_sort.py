@@ -12,7 +12,7 @@ def merge_sort(array) -> list[int]:
     result = [0] * len(array)
 
     # сливаем результаты
-    l, r, k = 0, 0, 0
+    l, r, k = 0, 0, 0  # noqa: E741
     while l < len(left) and r < len(right):
         # выбираем, из какого массива забрать минимальный элемент
         if left[l] <= right[r]:

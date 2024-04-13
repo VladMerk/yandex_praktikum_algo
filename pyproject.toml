@@ -17,6 +17,7 @@ isort = "^5.13.2"
 flake8 = "^7.0.0"
 flake8-pyproject = "^1.2.3"
 ipykernel = "^6.29.4"
+ruff = "^0.3.7"
 
 [build-system]
 requires = ["poetry-core"]
@@ -27,6 +28,9 @@ max-line-length = 120
 extend-ignore = "W291 E128 E122"
 
 [tool.black]
+line-length = 120
+
+[tool.ruff]
 line-length = 120
 
 [tool.pytest.ini_options]
