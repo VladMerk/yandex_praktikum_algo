@@ -3,58 +3,58 @@ from typing import Optional
 
 class Node:
     def __init__(self, key: int, value: int) -> None:
-        self.key = key
+        self.key: int = key
         self.value: int = value
-        self._next: Optional["Node"] = None
+        self.next: Optional["Node"] = None
 
 
 class HashArr:
-    def __init__(self, value: int | None = None) -> None:
-        self._head: Node | None = None
+    def __init__(self) -> None:
+        self.head: Node | None = None
 
     def add(self, key: int, value: int) -> None:
-        if self._head is None:
-            self._head = Node(key, value)
+        if self.head is None:
+            self.head = Node(key, value)
             return
 
-        if self._head.key == key:
-            self._head.value = value
+        if self.head.key == key:
+            self.head.value = value
             return
 
-        node: Node | None = self._head
-        while node._next:
+        node: Node | None = self.head
+        while node.next:
             if node.key == key:
                 node.value = value
                 return
-            node = node._next
-        node._next = Node(key, value)
+            node = node.next
+        node.next = Node(key, value)
 
     def get(self, key: int) -> int | None:
-        node: Node | None = self._head
+        node: Node | None = self.head
         while node:
             if node.key == key:
                 return node.value
-            node = node._next
+            node = node.next
         return None
 
     def delete(self, key: int) -> int | None:
-        if self._head is None:
+        if self.head is None:
             return None
 
-        if self._head.key == key:
-            value = self._head.value
-            self._head = self._head._next
+        if self.head.key == key:
+            value = self.head.value
+            self.head = self.head.next
             return value
 
-        prev_node: Node = self._head
-        current_node: Node | None = prev_node._next
+        prev_node: Node = self.head
+        current_node: Node | None = prev_node.next
         while current_node:
             if current_node.key == key:
                 value: int = current_node.value
-                prev_node._next = current_node._next
+                prev_node.next = current_node.next
                 return value
             prev_node = current_node
-            current_node = current_node._next
+            current_node = current_node.next
         return None
 
 
@@ -67,8 +67,8 @@ class HashTable:
         return value % self.max_size
 
     def get(self, key: int) -> int | None:
-        item: HashArr | None = self.items[self._get_bucket(key)]
-        return item.get(key)
+        bucket: int = self._get_bucket(key)
+        return self.items[bucket].get(key)
 
     def put(self, key: int, value: int) -> None:
         bucket: int = self._get_bucket(key)
@@ -79,7 +79,7 @@ class HashTable:
         return self.items[bucket].delete(key)
 
 
-def main():
+def main() -> None:
     n = int(input())
     table = HashTable()
 
