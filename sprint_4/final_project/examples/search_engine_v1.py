@@ -1,6 +1,4 @@
 import sys
-from collections import Counter
-from heapq import nsmallest
 
 import pytest
 
@@ -135,10 +133,4 @@ def test_search_engine(documents, queries, expected) -> None:
 
 
 if __name__ == "__main__":
-    # pytest.main([__file__] + ["-vvv"])
-    # result = search_engine(
-    #     documents=["i love coffee", "coffee with milk and sugar", "free tea for everyone"],
-    #     queries=["i like black coffee without milk", "everyone loves new year", "mary likes black coffee without milk"]
-    # )
-    # print(result)
     test()

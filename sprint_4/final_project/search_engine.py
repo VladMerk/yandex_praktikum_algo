@@ -18,16 +18,16 @@ def build_index(documents: list[str]) -> dict:
     return index
 
 
-def search(index: dict[str, tuple[int, int]], query: str) -> list[int]:
+def search(index: dict[str, list[tuple[int, int]]], query: str) -> list[int]:
     relevance: dict[int, int] = {}
 
     for word in set(query.split()):
-        index_item: tuple[int, int] | None = index.get(word)
+        index_item: list[tuple[int, int]] | None = index.get(word)
 
         if index_item is None:
             continue
 
-        for idx, count in index_item:  # type: ignore
+        for idx, count in index_item:
             rel: int | None = relevance.get(idx)
 
             if rel is None:
@@ -39,11 +39,11 @@ def search(index: dict[str, tuple[int, int]], query: str) -> list[int]:
 
 
 def search_engine(documents: list[str], queries: list[str]) -> list[list[int]]:
-    indx: dict[str, tuple[int, int]] = build_index(documents)
+    indx: dict[str, list[tuple[int, int]]] = build_index(documents)
     return [search(index=indx, query=query) for query in queries]
 
 
-def main():
+def main() -> None:
     n = int(input())
     input_docs = []
     while n > 0:

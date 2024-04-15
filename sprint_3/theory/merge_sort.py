@@ -17,7 +17,7 @@ def merge_sort(array) -> list[int]:
         # выбираем, из какого массива забрать минимальный элемент
         if left[l] <= right[r]:
             result[k] = left[l]
-            l += 1
+            l += 1  # noqa: E741
         else:
             result[k] = right[r]
             r += 1
@@ -27,7 +27,7 @@ def merge_sort(array) -> list[int]:
     # переносим оставшиеся элементы второго массива в результирующий
     while l < len(left):
         result[k] = left[l]  # перенеси оставшиеся элементы left в result
-        l += 1
+        l += 1  # noqa: E741
         k += 1
     while r < len(right):
         result[k] = right[r]  # перенеси оставшиеся элементы right в result
