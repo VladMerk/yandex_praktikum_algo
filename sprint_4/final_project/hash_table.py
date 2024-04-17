@@ -5,7 +5,7 @@
    - get: получение данных из таблицы
    - delete: удаление данных из таблицы
 
-Хэш-таблица состоит из списка ячеек, которых по умолчанию содержится 10^5-1,
+Хэш-таблица состоит из списка ячеек, которых по умолчанию содержится 10^5 * 4 / 3,
 что задано по условию - при любой последовательности команд, количество ключей
 в хэш-таблице не может превышать 10^5, каждая ячейка это связный список
 для разрешения коллизий по методу цепочек.
@@ -28,7 +28,7 @@
 Пространственна сложность равна O(n) - для хранения ячеек таблицы
 
 
-Посылка: https://contest.yandex.ru/contest/24414/run-report/112109630/
+Посылка: https://contest.yandex.ru/contest/24414/run-report/112231179/
 """
 
 
@@ -57,8 +57,8 @@ class HashArr:
 
         node: Node | None = self.head
         while node.next:
-            if node.key == key:
-                node.value = value
+            if node.next.key == key:
+                node.next.value = value
                 return
             node = node.next
         node.next = Node(key, value)
@@ -93,7 +93,7 @@ class HashArr:
 
 
 class HashTable:
-    def __init__(self, size: int = 10 ** 5 - 1):
+    def __init__(self, size: int = int(10 ** 5 * 4 / 3)):
         self.max_size: int = size
         self.items: list[HashArr] = [HashArr() for _ in range(self.max_size)]
 

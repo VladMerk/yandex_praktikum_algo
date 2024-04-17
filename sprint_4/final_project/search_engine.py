@@ -16,14 +16,21 @@ id документа и количество вхождений слова в �
 
 
    --- Временная сложность:
-для функции `build_index` сложность составляет O(n * m), где
+для функции `build_index` сложность составляет O(n * w), где
   - n: количество переданных в функцию документов
-  - m: количество слов в каждом документе
+  - w: количество слов в каждом документе
 
-для функции `search` сложность составляет O(n * mlogm), где
-  - n: количество уникальных слов в запросе
-  - m: количество совпавших слов, по ним производиться сортировка
+для функции `search` сложность составляет O(wm * klogk), где
+  - wm: количество уникальных слов в запросе
+  - k: количество совпавших слов, по ним производиться сортировка
 
+общая сложность для всего алгоритма составляет:
+  - поисковый индекс создается за время O(n), где
+     - n - количество переданных документов.
+  - функция поиска вызывается m раз и за klogk происходит сортировка результата, где
+     - m - количество запросов
+     - k - совпавшие слова в запросе.
+соответственно общая сложность равна O(n * m * klogk)
 
    --- Пространственная сложность:
 для функции `build_index` сложность составляет O(n), где
@@ -34,7 +41,7 @@ id документа и количество вхождений слова в �
   (при создании set'a для хранения слов из запроса)
 
 
-Посылка: https://contest.yandex.ru/contest/24414/run-report/111890010/
+Посылка: https://contest.yandex.ru/contest/24414/run-report/112218485/
 """
 
 from collections import Counter
@@ -46,13 +53,11 @@ def build_index(documents: list[str]) -> dict:
     for idx, document in enumerate(documents, 1):
         words = Counter(document.split())
         for word in words:
-            word_index: list[tuple[int, int]] | None = index.get(word)
             index_el: tuple[int, int] = (idx, words[word])
 
-            if word_index is None:
-                index[word] = [index_el]
-            else:
-                index[word].append(index_el)
+            word_index: list[tuple[int, int]] = index.get(word, [])
+            word_index.append(index_el)
+            index[word] = word_index
 
     return index
 
@@ -67,12 +72,8 @@ def search(index: dict[str, list[tuple[int, int]]], query: str) -> list[int]:
             continue
 
         for idx, count in index_item:
-            rel: int | None = relevance.get(idx)
-
-            if rel is None:
-                relevance[idx] = count
-            else:
-                relevance[idx] += count
+            rel: int = relevance.setdefault(idx, 0)
+            relevance[idx] = rel + count
 
     return [result[0] for result in sorted(relevance.items(), key=lambda item: (-item[1], item[0]))[:5]]
 
@@ -85,15 +86,13 @@ def search_engine(documents: list[str], queries: list[str]) -> list[list[int]]:
 def main() -> None:
     n = int(input())
     input_docs = []
-    while n > 0:
+    for _ in range(n):
         input_docs.append(input())
-        n -= 1
 
     m = int(input())
     input_queries = []
-    while m > 0:
+    for _ in range(m):
         input_queries.append(input())
-        m -= 1
 
     results: list[list[int]] = search_engine(documents=input_docs, queries=input_queries)
     for res in results:
