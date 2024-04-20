@@ -55,7 +55,7 @@ class HashArr:
             self.head.value = value
             return
 
-        node: Node | None = self.head
+        node: Node = self.head
         while node.next:
             if node.next.key == key:
                 node.next.value = value
@@ -76,7 +76,7 @@ class HashArr:
             return None
 
         if self.head.key == key:
-            value = self.head.value
+            value: int = self.head.value
             self.head = self.head.next
             return value
 
@@ -84,7 +84,7 @@ class HashArr:
         current_node: Node | None = prev_node.next
         while current_node:
             if current_node.key == key:
-                value: int = current_node.value
+                value = current_node.value
                 prev_node.next = current_node.next
                 return value
             prev_node = current_node
