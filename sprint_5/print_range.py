@@ -1,25 +1,25 @@
 
 class Node:
     def __init__(self, left=None, right=None, value=0):
-        self.right = right
-        self.left = left
-        self.value = value
+        self.right: Node | None = right
+        self.left: Node | None = left
+        self.value: int = value
 
 
-def print_range(node, l: int, r: int) -> None:
+def print_range(node, left: int, right: int) -> None:
     #  Your code
     #  “ヽ(´▽｀)ノ”
     if node is None:
         return
 
-    if l <= node.value:
-        print_range(node.left, l, r)
+    if left <= node.value:
+        print_range(node.left, left, right)
 
-    if l <= node.value <= r:
+    if left <= node.value <= right:
         print(node.value)
 
-    if r >= node.value:
-        print_range(node.right, l, r)
+    if right >= node.value:
+        print_range(node.right, left, right)
 
 
 def test():

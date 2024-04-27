@@ -1,42 +1,61 @@
-def sift_up(heap, index):
-    if index == 1:
-        return
+class MinHeap:
+    def __init__(self):
+        self.heap: list[int] = []
 
-    parent_index = index // 2
-    if heap[index] > heap[parent_index]:
-        heap[index], heap[parent_index] = heap[parent_index], heap[index]
-        sift_up(heap, parent_index)
+    def __len__(self):
+        return len(self.heap)
+
+    def parent(self, index) -> int:
+        return (index - 1) // 2
+
+    def left_child(self, index) -> int:
+        return 2 * index + 1
+
+    def right_child(self, index) -> int:
+        return 2 * index + 2
+
+    def insert(self, value):
+        self.heap.append(value)
+        i = len(self.heap) - 1
+        while i > 0 and self.heap[self.parent(i)] > self.heap[i]:
+            self.heap[self.parent(i)], self.heap[i] = self.heap[i], self.heap[self.parent(i)]
+            i = self.parent(i)
+
+    def heapify(self, index):
+        smallest = index
+        left = self.left_child(index)
+        right = self.right_child(index)
+        if left < len(self.heap) and self.heap[left] < self.heap[smallest]:
+            smallest = left
+        if right < len(self.heap) and self.heap[right] < self.heap[smallest]:
+            smallest = right
+        if smallest != index:
+            self.heap[index], self.heap[smallest] = self.heap[smallest], self.heap[index]
+            self.heapify(smallest)
+
+    def extract_min(self):
+        if len(self.heap) == 0:
+            return None
+
+        root = self.heap[0]
+        self.heap[0] = self.heap[-1]
+        del self.heap[-1]
+        self.heapify(0)
+        return root
+
+    def get_min(self):
+        if len(self.heap) == 0:
+            return None
+        return self.heap[0]
 
 
-def heap_add(heap, key):
-    heap.append(key)
-    index = len(heap) - 1
-    sift_up(heap, index)
-
-
-def sift_down(heap, index):
-    heap_max_index = len(heap) - 1
-    left = index * 2
-    right = index * 2 + 1
-
-    # нет дочерних узлов
-    if left > heap_max_index:
-        return
-
-    # проверяем, что есть оба дочерних узла
-    if right <= heap_max_index and heap[right] > heap[left]:
-        index_largest = right
-    else:
-        index_largest = left
-    # отправляем максимум на вершину кучи и рекурсивно завпускаем просеивание в ребенке
-    if heap[index_largest] > heap[index]:
-        heap[index_largest], heap[index] = heap[index], heap[index_largest]
-        sift_down(heap, index_largest)
-
-
-def pop_max(heap):
-    result = heap[1]
-    heap[1] = heap[len(heap) - 1]
-    heap.pop()
-    sift_down(heap, 1)
-    return result
+if __name__ == "__main__":
+    heap = MinHeap()
+    heap.insert(3)
+    heap.insert(6)
+    heap.insert(2)
+    heap.insert(4)
+    heap.insert(8)
+    heap.insert(10)
+    print(heap.heap)
+    print(len(heap))
