@@ -44,9 +44,7 @@ class MinHeap:
         return root
 
     def get_min(self):
-        if len(self.heap) == 0:
-            return None
-        return self.heap[0]
+        return None if len(self.heap) == 0 else self.heap[0]
 
 
 if __name__ == "__main__":

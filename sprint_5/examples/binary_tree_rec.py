@@ -15,14 +15,10 @@ class AVLTree:
         self.root: Node | None = None
 
     def get_height(self, node: Node | None) -> int:
-        if not node:
-            return 0
-        return node.height
+        return node.height if node else 0
 
     def get_balance(self, node: Node) -> int:
-        if not node:
-            return 0
-        return self.get_height(node.left) - self.get_height(node.right)
+        return self.get_height(node.left) - self.get_height(node.right) if node else 0
 
     def _rotate_right(self, z: Node) -> Node:
         y: Node = z.left
