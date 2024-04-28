@@ -49,7 +49,7 @@ class AVLTree:
         return y
 
     def _insert(self, root: Node | None, value: int) -> Node:
-        if not root:
+        if root is None:
             return Node(value)
         elif value < root.value:
             root.left = self._insert(root.left, value)

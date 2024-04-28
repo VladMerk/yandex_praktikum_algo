@@ -1,5 +1,5 @@
 class MinHeap:
-    def __init__(self):
+    def __init__(self) -> None:
         self.heap: list[int] = []
 
     def __len__(self):
@@ -16,15 +16,15 @@ class MinHeap:
 
     def insert(self, value):
         self.heap.append(value)
-        i = len(self.heap) - 1
+        i: int = len(self.heap) - 1
         while i > 0 and self.heap[self.parent(i)] > self.heap[i]:
             self.heap[self.parent(i)], self.heap[i] = self.heap[i], self.heap[self.parent(i)]
             i = self.parent(i)
 
     def heapify(self, index):
         smallest = index
-        left = self.left_child(index)
-        right = self.right_child(index)
+        left: int = self.left_child(index)
+        right: int = self.right_child(index)
         if left < len(self.heap) and self.heap[left] < self.heap[smallest]:
             smallest = left
         if right < len(self.heap) and self.heap[right] < self.heap[smallest]:
@@ -37,7 +37,7 @@ class MinHeap:
         if len(self.heap) == 0:
             return None
 
-        root = self.heap[0]
+        root: int = self.heap[0]
         self.heap[0] = self.heap[-1]
         del self.heap[-1]
         self.heapify(0)
