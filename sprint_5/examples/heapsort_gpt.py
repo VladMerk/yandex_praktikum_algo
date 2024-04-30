@@ -52,10 +52,8 @@ def heap_sort(arr):
     heap = MinHeap()
     for element in arr:
         heap.insert(element)
-    sorted_arr = []
-    for _ in range(len(arr)):
-        sorted_arr.append(heap.extract_min())
-    return sorted_arr
+    return [heap.extract_min() for _ in range(len(arr))]
+
 
 participants_input = [
     ("alla", 4, 100),

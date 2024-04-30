@@ -31,11 +31,11 @@ def sift_up(arr, index):
 
 def sift_down(arr, n, i):
     largest = i
-    l = 2 * i + 1
+    left = 2 * i + 1
     r = 2 * i + 2
 
-    if l < n and arr[l] > arr[largest]:
-        largest = l
+    if left < n and arr[left] > arr[largest]:
+        largest = left
 
     if r < n and arr[r] > arr[largest]:
         largest = r

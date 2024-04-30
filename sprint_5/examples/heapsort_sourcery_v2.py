@@ -11,9 +11,9 @@ class User:
         if self.tasks != other.tasks:
             return self.tasks < other.tasks
         elif self.penalty != other.penalty:
-            return self.penalty > other.penalty
+            return self.penalty < other.penalty
         else:
-            return self.name > other.name
+            return self.name < other.name
 
     def __repr__(self) -> str:
         return self.name
@@ -66,17 +66,22 @@ class HeapSort:
 
 # Example usage
 heap_sorter = HeapSort()
-heap_sorter.insert(User("Alice", 5, 10))
+heap_sorter.insert(User("alla", 4, 100))
 print("Sorted users after inserting Alice:")
 for user in heap_sorter.heap:
     print(user)
 
-heap_sorter.insert(User("Bob", 3, 15))
+heap_sorter.insert(User("timofey", 4, 80))
 print("\nSorted users after inserting Bob:")
 for user in heap_sorter.heap:
     print(user)
 
-heap_sorter.insert(User("Charlie", 7, 8))
+heap_sorter.insert(User("gena", 6, 1000))
+print("\nSorted users after inserting Charlie:")
+for user in heap_sorter.heap:
+    print(user)
+
+heap_sorter.insert(User("rita", 2, 10))
 print("\nSorted users after inserting Charlie:")
 for user in heap_sorter.heap:
     print(user)
