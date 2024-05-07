@@ -19,9 +19,10 @@
  где n - количество элементов в заданном массиве.
 Это связано с тем, что требуется дополнительная память для хранения структуры кучи.
 
-Посылка: https://contest.yandex.ru/contest/24810/run-report/113144340/
+Посылка: https://contest.yandex.ru/contest/24810/run-report/113639852/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import dataclass
 
 
 @dataclass
@@ -42,9 +43,12 @@ class User:
         return self.name
 
 
-@dataclass
 class Heap:
-    heap: list[User] = field(default_factory=list)
+    def __init__(self) -> None:
+        self.heap: list[User] = []
+
+    def __bool__(self):
+        return bool(self.heap)
 
     def parent(self, index: int) -> int:
         return index // 2
@@ -90,14 +94,30 @@ class Heap:
         return result
 
 
+def heap_sort(users: list[User]) -> list[User]:
+    heap = Heap()
+    for user in users:
+        heap.insert(user)
+
+    sorted_users: list[User] = []
+    while heap:
+        sorted_users.append(heap.pop())
+
+    return sorted_users
+
+
 if __name__ == "__main__":
     n = int(input())
 
     heap = Heap()
 
-    for _ in range(n):
-        login, tasks, penalty = input().strip().split()
-        heap.insert(User(login, int(tasks), int(penalty)))
+    users: list[User] = []
 
     for _ in range(n):
-        print(heap.pop())
+        login, tasks, penalty = input().strip().split()
+        users.append(User(login, int(tasks), int(penalty)))
+
+    sorted_users: list[User] = heap_sort(users)
+
+    for user in sorted_users:
+        print(user)
