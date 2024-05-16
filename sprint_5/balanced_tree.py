@@ -1,8 +1,8 @@
-# class Node:
-#     def __init__(self, value, left=None, right=None):
-#         self.value = value
-#         self.right = right
-#         self.left = left
+class Node:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.right = right
+        self.left = left
 
 
 def get_height(root) -> int:
@@ -42,7 +42,7 @@ def test():
     node3 = Node(3, node1, node2)
     node4 = Node(10)
     node5 = Node(2, node3, node4)
-    assert solution(node5) == True
+    assert solution(node5) is True
 
 
 if __name__ == "__main__":

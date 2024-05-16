@@ -113,4 +113,3 @@ if __name__ == "__main__":
 
     for user in sorted_users:
         print(user.name)
-

@@ -4,7 +4,7 @@ from typing import Optional
 class Node:
     def __init__(self, key, height=1, left: Optional["Node"] = None, right: Optional["Node"] = None) -> None:
         self.key = key
-        self.left = left
+        self.left: Optional["Node"] = left
         self.right = right
         self.height = height
 
