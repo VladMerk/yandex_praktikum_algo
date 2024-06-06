@@ -8,6 +8,7 @@
 n предметов, каждый из которых имеет массу W(i) и стоимость v(i).
 Нужно выбрать набор предметов, чтобы максимизировать общую стоимость, не превышая массу W.
 '''
+import pprint
 
 
 def knapsack(weights: list, prices: list, W: int) -> int:
@@ -20,7 +21,8 @@ def knapsack(weights: list, prices: list, W: int) -> int:
                 dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + prices[i - 1])
             else:
                 dp[i][w] = dp[i - 1][w]
-    print(dp)
+    pprint.pprint(dp)
+    print()
     return dp[n][W]
 
 
