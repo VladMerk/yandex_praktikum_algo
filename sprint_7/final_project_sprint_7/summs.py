@@ -28,7 +28,7 @@
 """
 
 
-def can_partition(points: list) -> bool:
+def can_partition(points: list[int]) -> bool:
     total_sum: int = sum(points)
     if total_sum % 2 != 0:
         return False
@@ -44,7 +44,8 @@ def can_partition(points: list) -> bool:
     return dp[target]
 
 
-n = int(input())
-points = list(map(int, input().strip().split()))
+def main():
+    n: int = int(input())
+    points: list[int] = list(map(int, input().strip().split()))
 
-print(can_partition(points))
+    print(can_partition(points))
